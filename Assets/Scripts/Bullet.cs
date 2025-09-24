@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int damage = 1;
     public float speed = 10f;
-    public float lifeTime = 3f;
+    public float lifeTime = 2f;
 
     void Start()
     {
@@ -15,5 +16,11 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
-    // “G‚É“–‚½‚Á‚½‚Ìˆ—‚È‚Ç‚ğ‚±‚±‚É‘‚­‚±‚Æ‚à‚Å‚«‚é‚Ëi—á: OnTriggerEnter2Dj
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
 }

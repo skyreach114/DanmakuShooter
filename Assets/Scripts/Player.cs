@@ -5,17 +5,25 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public float normalSpeed = 6f;
-    public float lowSpeed = 3f;
+    public float normalSpeed = 6.5f;
+    public float lowSpeed = 3.5f;
     public float currentSpeed;
+    public float touchSpeedMultiplier = 1.2f;
 
     private Vector2 moveInput;
     private Vector3 offset;
+    private Vector3 targetPosition;
 
     private bool isDragging = false;
+    public bool isLowSpeed = false;
 
     void Update()
     {
+        if (!isLowSpeed)
+        {
+            currentSpeed = Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed
+            ? lowSpeed : normalSpeed;
+        }
 
         bool isTouchOrClick = (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed) ||
                               (Mouse.current != null && Mouse.current.leftButton.isPressed);
@@ -26,29 +34,22 @@ public class Player : MonoBehaviour
                                 Mouse.current.position.ReadValue();
 
             Vector3 currentWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, Camera.main.nearClipPlane));
-            currentWorldPos.z = 0; // 2DなのでZは0に固定
+            currentWorldPos.z = 0;
 
             if (!isDragging)
             {
-                // **【重要】オフセットを計算して記憶**
-                // プレイヤーの現在位置からタッチ位置を引いたものがオフセットになる
                 offset = transform.position - currentWorldPos;
                 isDragging = true;
             }
 
-            // 3. **ドラッグ中の処理**
-            // 現在のタッチ位置に、記憶したオフセットを足した位置へプレイヤーを移動させる
-            Vector3 targetPosition = currentWorldPos + offset;
-
-            // 移動を滑らかにするならLerpなどを使うけど、今回はシンプルに直接代入
-            transform.position = targetPosition;
+            float finalSpeed = currentSpeed * touchSpeedMultiplier;
+            targetPosition = currentWorldPos + offset;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, finalSpeed * Time.deltaTime);
         }
         else
         {
             isDragging = false;
 
-            currentSpeed = Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed
-            ? lowSpeed : normalSpeed;
             Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
             transform.Translate(moveDirection * currentSpeed * Time.deltaTime);
         }
@@ -62,5 +63,19 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        currentSpeed = newSpeed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            //2倍ダメージ処理にすり替え
+        }
     }
 }

@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class EnemyShooter_Simple : MonoBehaviour
 {
     public GameObject bulletPrefab;
 
-    public Transform firePoint;
+    public Transform[] firePoints;
 
-    public float fireRate = 0.4f;
+    public float fireRate = 0.7f;
     private float nextFireTime = 0f;
 
     void Update()
@@ -21,7 +21,10 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        foreach (Transform firePoint in firePoints)
+        {
+            Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 180));
+        }
 
         // ’e‚Ì‰¹‚ğ–Â‚ç‚·ˆ—‚È‚Ç‚ğ‚±‚±‚É“ü‚ê‚é
     }
