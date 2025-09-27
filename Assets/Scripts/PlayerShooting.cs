@@ -3,25 +3,42 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    public GameObject bulletSidePrefab;
 
     public Transform firePoint;
+    public Transform[] sideFirePoints;
 
     public float fireRate = 0.4f;
     private float nextFireTime = 0f;
+
+    private bool sideGunsEnabled = false;
 
     void Update()
     {
         if (Time.time > nextFireTime)
         {
-            Shoot();
+            Shoot(bulletPrefab, firePoint);
+
+            if (sideGunsEnabled)
+            {
+                foreach (Transform sidePoint in sideFirePoints)
+                {
+                    Shoot(bulletSidePrefab, sidePoint);
+                }
+            }
 
             nextFireTime = Time.time + fireRate;
         }
     }
 
-    void Shoot()
+    public void EnableSideGuns()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        sideGunsEnabled = true;
+    }
+
+    void Shoot(GameObject bulletP, Transform firePoint)
+    {
+        Instantiate(bulletP, firePoint.position, firePoint.rotation);
 
         // ’e‚Ì‰¹‚ğ–Â‚ç‚·ˆ—‚È‚Ç‚ğ‚±‚±‚É“ü‚ê‚é
     }

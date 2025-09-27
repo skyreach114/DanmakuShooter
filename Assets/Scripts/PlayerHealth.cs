@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 5;
-    private int currentHealth;
+    public int maxHP = 5;
+    public int currentHP;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHP = maxHP;
     }
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
+        currentHP -= damageAmount;
 
-        if (currentHealth <= 0)
+        if (currentHP <= 0)
         {
             Die();
         }
@@ -33,6 +33,11 @@ public class PlayerHealth : MonoBehaviour
         {
             Bullet bullet = other.GetComponent<Bullet>();
             TakeDamage(bullet.damage);
+        }
+
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
         }
     }
 }

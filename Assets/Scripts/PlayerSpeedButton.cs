@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerSpeedButton : MonoBehaviour
 {
-    public Player playerScript;
+    public PlayerMovement playerMove;
 
     public Sprite lowSpeedSprite;
     public Sprite normalSpeedSprite;
@@ -17,17 +17,18 @@ public class PlayerSpeedButton : MonoBehaviour
 
     public void ToggleSpeed()
     {
-        playerScript.isLowSpeed = !playerScript.isLowSpeed;
+        playerMove.isLowSpeed = !playerMove.isLowSpeed;
 
-        if (playerScript.isLowSpeed)
+        if (playerMove.isLowSpeed)
         {
             buttonImage.sprite = normalSpeedSprite;
-            playerScript.SetSpeed(playerScript.lowSpeed);
+            playerMove.SetSpeed(playerMove.lowSpeed);
+            Debug.Log(playerMove.lowSpeed);
         }
         else
         {
             buttonImage.sprite = lowSpeedSprite;
-            playerScript.SetSpeed(playerScript.normalSpeed);
+            playerMove.SetSpeed(playerMove.normalSpeed);
         }
     }
 }

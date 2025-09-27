@@ -12,7 +12,7 @@ public class EnemyShooter_Aim : MonoBehaviour
 
     void Start()
     {
-        playerObj = FindAnyObjectByType<Player>().gameObject;
+        playerObj = FindAnyObjectByType<PlayerController>().gameObject;
     }
 
     void Update()
