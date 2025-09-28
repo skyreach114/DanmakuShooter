@@ -10,7 +10,7 @@ public class SceneSwitcher : MonoBehaviour
     public void OnPressGameStart()
     {
         // 1. BGMControllerのインスタンスを取得
-        BGMController bgmController = BGMController.GetInstance();
+        BGMManager bgmController = BGMManager.GetInstance();
 
         if (bgmController != null)
         {

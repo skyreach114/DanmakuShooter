@@ -36,12 +36,12 @@ public class CharacterSelectManager : MonoBehaviour
     {
         if (selectedIndex < 0) return;
 
-        BGMController bgmController = BGMController.GetInstance();
+        BGMManager bgmManager = BGMManager.GetInstance();
 
-        if (bgmController != null)
+        if (bgmManager != null)
         {
             // 2. BGM‚ð’âŽ~‚µAƒQ[ƒ€BGM‚ÉØ‚è‘Ö‚¦‚éˆ—‚ðŒÄ‚Ño‚·
-            bgmController.StopAndSwitchBGM(gameBGMClip);
+            bgmManager.StopAndSwitchBGM(gameBGMClip);
         }
 
         SceneManager.LoadScene("GameScene");

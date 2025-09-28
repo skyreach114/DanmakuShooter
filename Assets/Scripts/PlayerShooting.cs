@@ -15,6 +15,11 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance != null && !GameManager.Instance.isGameActive)
+        {
+            return;
+        }
+
         if (Time.time > nextFireTime)
         {
             Shoot(bulletPrefab, firePoint);

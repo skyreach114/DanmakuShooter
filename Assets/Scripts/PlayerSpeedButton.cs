@@ -23,7 +23,6 @@ public class PlayerSpeedButton : MonoBehaviour
         {
             buttonImage.sprite = normalSpeedSprite;
             playerMove.SetSpeed(playerMove.lowSpeed);
-            Debug.Log(playerMove.lowSpeed);
         }
         else
         {
