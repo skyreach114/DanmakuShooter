@@ -110,8 +110,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1375542195
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1147401495359466748, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3536214459019467717, guid: 1065a5d410fe42a40b60832687191002, type: 3}
   firePoint: {fileID: 242655054653315454}
-  fireRate: 1
+  fireRate: 1.5
 --- !u!114 &168017668751930826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   damageSprite: {fileID: -7844560889915226194, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  enemyDieEffectPrefab: {fileID: 5795649102851928233, guid: 37e1a139c79896b498805d51013a2826, type: 3}
 --- !u!114 &3764719855030318695
 MonoBehaviour:
   m_ObjectHideFlags: 0

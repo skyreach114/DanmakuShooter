@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 43401264}
   - component: {fileID: 43401263}
   - component: {fileID: 43401266}
+  - component: {fileID: 43401267}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,6 +257,22 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &43401267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43401262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73b0a95be81246699cf0d9ecdc01863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PreferredRunner: 0
+  Components:
+  - {fileID: 43401263}
+  _guid: 6fb07347-8c6e-4695-
 --- !u!1 &235154028
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +605,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 424910c0b3ff7cc4ba984484f90c60e8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -696,7 +713,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 385982884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8bab8e03e42bd2448aa1a24710a8d04, type: 3}
+  m_Script: {fileID: 11500000, guid: 389d337efb076ec4fb3441413a07d083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleAndSelectBGM: {fileID: 8300000, guid: 424910c0b3ff7cc4ba984484f90c60e8, type: 3}
@@ -2083,7 +2100,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 540, y: 960}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

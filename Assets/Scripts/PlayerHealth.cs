@@ -6,15 +6,21 @@ public class PlayerHealth : MonoBehaviour
     public int maxHP = 5;
     public int currentHP;
 
-    public float invincibilityDuration = 0.8f;
+    public float invincibilityDuration = 0.9f;
     private bool isInvincible = false;
 
     private SpriteRenderer spriteRenderer;
+    public GameObject dieEffectPrefab;
 
     void Start()
     {
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public int GetHP()
+    {
+        return currentHP;
     }
 
     public void TakeDamage(int damageAmount)
@@ -53,9 +59,18 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
+        currentHP = 0;
+
+        HPIcon hpIcon = FindFirstObjectByType<HPIcon>();
+        if (hpIcon != null)
+        {
+            hpIcon.ForceUpdateIcon();
+        }
+
         GameManager.Instance.GameOver();
 
         // 破壊エフェクトの再生、スコア加算などの処理をここに入れる
+        Instantiate(dieEffectPrefab, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

@@ -142,8 +142,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1375542195
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -8421458170528590454, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -241,11 +241,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c27e71de55b2b43adaaeeb7ef16012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3982112324596227675, guid: 2bd01fd4584038844a7157ee548d8532, type: 3}
+  bulletPrefab: {fileID: 6020365020622004122, guid: c0729c0715722f844a74ae4ca5dce3cd, type: 3}
   firePoints:
   - {fileID: 3547152689852408408}
   - {fileID: 7498221623192132653}
-  fireRate: 0.9
+  fireRate: 1.4
 --- !u!114 &3485224307685620846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   damageSprite: {fileID: 3714015224569861163, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
+  enemyDieEffectPrefab: {fileID: 7953525964599258361, guid: b344e9fa21671544392bace8150f8f74, type: 3}
 --- !u!114 &5756898823651362884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,3 +275,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   stopYPosition: 4
+  maxAngleDeviation: 15

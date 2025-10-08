@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,9 +25,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             currentSpeed = normalSpeed;
-            Debug.Log("currentSpeed" + currentSpeed);
-            Debug.Log("normalSpeed" + normalSpeed);
-            Debug.Log("lowSpeed" + lowSpeed);
         }
         
 

@@ -36,6 +36,11 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    public void SetFireRate(float newRate)
+    {
+        fireRate = newRate;
+    }
+
     public void EnableSideGuns()
     {
         sideGunsEnabled = true;

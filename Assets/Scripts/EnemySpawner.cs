@@ -5,7 +5,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
 
-    private float spawnInterval = 1.5f;
+    private float spawnInterval = 1.8f;
     private float spawnXMin = -3.5f;
     private float spawnXMax = 3.5f;
     private float spawnY = 7.4f;

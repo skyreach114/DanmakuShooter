@@ -11,6 +11,8 @@ public class EnemyHealth : MonoBehaviour
     private Sprite defaltSprite;
     private SpriteRenderer spriteRenderer;
 
+    public GameObject enemyDieEffectPrefab;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -45,6 +47,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         // 破壊エフェクトの再生、スコア加算などの処理をここに入れる
+        Instantiate(enemyDieEffectPrefab, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

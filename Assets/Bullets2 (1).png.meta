@@ -216,9 +216,9 @@ TextureImporter:
       name: Bullets2 (1)_4
       rect:
         serializedVersion: 2
-        x: 65
+        x: 69
         y: 2
-        width: 10
+        width: 2
         height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

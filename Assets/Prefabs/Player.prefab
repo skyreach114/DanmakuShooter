@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 660084196165183486}
   - component: {fileID: 5558789366935242070}
   - component: {fileID: 8950029432764765622}
-  - component: {fileID: 7401791823647950214}
+  - component: {fileID: -1730063419520364331}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -146,8 +146,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2130157367
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -1828254072201267085, guid: 8d71cd63f83f5d443ae35da7df03ef90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -411,7 +411,7 @@ MonoBehaviour:
   - {fileID: 1106074513223659177}
   - {fileID: 3988162696398509811}
   fireRate: 0.4
---- !u!114 &7401791823647950214
+--- !u!114 &-1730063419520364331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -425,6 +425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 5
   currentHP: 0
+  invincibilityDuration: 0.9
+  dieEffectPrefab: {fileID: 1124340208968681610, guid: a973e7a3e125dd1468e8ef640bd338b2, type: 3}
 --- !u!1 &6630165296264142644
 GameObject:
   m_ObjectHideFlags: 0

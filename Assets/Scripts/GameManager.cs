@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -7,21 +8,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private static BGMManager bgmManager;
     public EnemySpawner enemySpawner;
 
     public int enemiesDefeated = 0;
-    public int enemiesToLevelUp = 4;
-    public int enemiesToClear = 10;
+    public int enemiesToClear = 15;
 
     public CharacterData[] characters;
     public GameObject playerPrefab;
     public Transform playerSpawnPoint;
 
-    private PlayerShooting playerShooting;
-
+    public PlayerExperience playerExperience;
+    public HPIcon hpIconUI;
     public PlayerSpeedButton speedButton;
-
     public TextMeshProUGUI levelUpText;
     public TextMeshProUGUI gameStartText;
     public TextMeshProUGUI gameClearText;
@@ -62,13 +60,25 @@ public class GameManager : MonoBehaviour
 
         var pc = playerObj.GetComponent<PlayerController>();
         var pm = playerObj.GetComponent<PlayerMovement>();
-        playerShooting = playerObj.GetComponent<PlayerShooting>();
+        var ph = playerObj.GetComponent<PlayerHealth>();
+        var ps = playerObj.GetComponent<PlayerShooting>();
 
         pc.SetupFromData(data);
+
+        if (playerExperience != null)
+        {
+            playerExperience.Setup(ps);
+            // UIの初期設定はPlayerExperienceで行う
+        }
 
         if (speedButton != null && pm != null)
         {
             speedButton.playerMove = pm;
+        }
+
+        if (hpIconUI != null && ph != null)
+        {
+            hpIconUI.InitializeHP(ph);
         }
 
         Invoke("EraseGameStartText", 1f);
@@ -76,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     void EraseGameStartText()
     {
-        if(enemySpawner != null)
+        if (enemySpawner != null)
         {
             enemySpawner.StartSpawning();
         }
@@ -97,30 +107,19 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameActive) return;
 
-        enemiesDefeated++;
-
-        if (enemiesDefeated == enemiesToLevelUp)
+        if (playerExperience != null)
         {
-            LevelUp();
+            playerExperience.AddExp(1);
+            enemiesDefeated++;
         }
-        else if (enemiesDefeated >= enemiesToClear)
+
+        if (enemiesDefeated >= enemiesToClear)
         {
             GameClear();
         }
     }
 
-    void LevelUp()
-    {
-        Debug.Log("レベルアップ！攻撃力アップ！");
-
-        levelUpText.gameObject.SetActive(true);
-        levelUpText.color = new Color32(255, 255, 255, 255);
-        StartCoroutine("FadeOut");
-        Instantiate(clearEffectPrefab, Vector3.zero, Quaternion.identity);
-        playerShooting.EnableSideGuns();
-    }
-
-    IEnumerator FadeOut()
+    public IEnumerator FadeOut()
     {
         while (true)
         {
@@ -142,7 +141,7 @@ public class GameManager : MonoBehaviour
         retryButton.SetActive(true);
         titleButton.SetActive(true);
 
-        //clearSound.Play(); ;
+        //clearSound.Play();
 
         if (enemySpawner != null)
         {
@@ -176,5 +175,4 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene("TitleScene");
     }
-
 }

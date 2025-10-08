@@ -1,3 +1,5 @@
+using Fusion;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,7 +25,7 @@ public class CharacterSelectManager : MonoBehaviour
         PlayerPrefs.Save();
         startGameButton.interactable = true;
 
-        foreach(Image image in images)
+        foreach (Image image in images)
         {
             image.color = new Color(1, 1, 1, 0.02f);
         }
