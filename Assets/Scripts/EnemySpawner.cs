@@ -10,8 +10,6 @@ public class EnemySpawner : MonoBehaviour
     private float spawnXMax = 3.5f;
     private float spawnY = 7.4f;
 
-    public GameManager gameManager;
-
     public void StartSpawning()
     {
         StartCoroutine(SpawnEnemiesRoutine());
@@ -19,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemiesRoutine()
     {
-        while (gameManager.isGameActive)
+        while (GameManager.Instance.isGameActive && !GameManager.Instance.isBossSpawn)
         {
             int randomIndex = Random.Range(0, enemyPrefabs.Length);
             GameObject enemyToSpawn = enemyPrefabs[randomIndex];
@@ -31,6 +29,8 @@ public class EnemySpawner : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        Debug.Log("G‹›“G‚Ì¶¬‚ğ’â~Bƒ{ƒXíŠJn!");
     }
 
     public void DestroyAllEnemies()

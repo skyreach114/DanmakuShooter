@@ -13,6 +13,9 @@ public class PlayerShooting : MonoBehaviour
 
     private bool sideGunsEnabled = false;
 
+    public AudioSource fireSound;
+    public AudioSource sideGunsFireSound;
+
     void Update()
     {
         if (GameManager.Instance != null && !GameManager.Instance.isGameActive)
@@ -23,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
         if (Time.time > nextFireTime)
         {
             Shoot(bulletPrefab, firePoint);
+            AudioSource.PlayClipAtPoint(fireSound.clip, new Vector3(0, 0, -6), 0.08f);
 
             if (sideGunsEnabled)
             {
@@ -30,6 +34,8 @@ public class PlayerShooting : MonoBehaviour
                 {
                     Shoot(bulletSidePrefab, sidePoint);
                 }
+
+                AudioSource.PlayClipAtPoint(sideGunsFireSound.clip, new Vector3(0, 0, -1), 0.08f);
             }
 
             nextFireTime = Time.time + fireRate;
@@ -49,7 +55,5 @@ public class PlayerShooting : MonoBehaviour
     void Shoot(GameObject bulletP, Transform firePoint)
     {
         Instantiate(bulletP, firePoint.position, firePoint.rotation);
-
-        // ’e‚Ì‰¹‚ğ–Â‚ç‚·ˆ—‚È‚Ç‚ğ‚±‚±‚É“ü‚ê‚é
     }
 }

@@ -716,7 +716,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d337efb076ec4fb3441413a07d083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleAndSelectBGM: {fileID: 8300000, guid: 424910c0b3ff7cc4ba984484f90c60e8, type: 3}
+  titleAndSelectBGM:
+    clip: {fileID: 0}
+    volume: 1
+  gameSceneBGM:
+    clip: {fileID: 0}
+    volume: 1
+  bossBGM:
+    clip: {fileID: 0}
+    volume: 1
+  clearBGM:
+    clip: {fileID: 0}
+    volume: 1
 --- !u!1 &492915264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,7 +1409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B7\u30EB\u30D0\u30FC\nHP\uFF1A\u9AD8\u3044\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u3084\u3084\u9045\u3044\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u666E\u901A\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u9045\u3044"
+  m_text: "\u30B7\u30EB\u30D0\u30FC\uFF08\u8010\u4E45\u578B\uFF09\nHP\uFF1A\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u3084\u3084\u9045\u3044\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u666E\u901A\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u9045\u3044"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
   m_sharedMaterial: {fileID: 5980327387822945061, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
@@ -1644,7 +1655,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30D6\u30ED\u30F3\u30C9\nHP\uFF1A\u666E\u901A\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u666E\u901A\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u3084\u3084\u5927\u304D\u3044\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u901F\u3044"
+  m_text: " \u30D6\u30ED\u30F3\u30C9\uFF08\u30B9\u30D4\u30FC\u30C9\u578B\uFF09\nHP\uFF1A\u25CF\u25CF\u25CF\u25CF\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u666E\u901A\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u3084\u3084\u5927\u304D\u3044\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u901F\u3044"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
   m_sharedMaterial: {fileID: 5980327387822945061, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
@@ -1778,7 +1789,6 @@ MonoBehaviour:
   - {fileID: 1150856796}
   - {fileID: 1966928477}
   startGameButton: {fileID: 307199628}
-  gameBGMClip: {fileID: 8300000, guid: fcdf765efb92c9148bdebc033447b91f, type: 3}
 --- !u!1 &1613543437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +1978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30D6\u30E9\u30C3\u30AF\nHP\uFF1A\u4F4E\u3081\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u901F\u3044\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u3084\u3084\u5C0F\u3055\u3044\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u3084\u3084\u901F\u3044"
+  m_text: "\u30D6\u30E9\u30C3\u30AF\uFF08\u653B\u6483\u578B\uFF09\nHP\uFF1A\u25CF\u25CF\u25CF\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u901F\u3044\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u3084\u3084\u5C0F\u3055\u3044\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u3084\u3084\u901F\u3044"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
   m_sharedMaterial: {fileID: 5980327387822945061, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
@@ -2210,7 +2220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B5\u30AF\u30E9\nHP\uFF1A\u666E\u901A\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u666E\u901A\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u666E\u901A\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u666E\u901A"
+  m_text: "\u30B5\u30AF\u30E9\uFF08\u30D0\u30E9\u30F3\u30B9\u578B\uFF09\nHP\uFF1A\u25CF\u25CF\u25CF\u25CF\n\u767A\u5C04\u30EC\u30FC\u30C8\uFF1A\u666E\u901A\n\u5F3E\u306E\u5927\u304D\u3055\uFF1A\u666E\u901A\n\u79FB\u52D5\u901F\u5EA6\uFF1A\u666E\u901A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}
   m_sharedMaterial: {fileID: 5980327387822945061, guid: 0ff5bd60d63afe44183f2ac327bdca0b, type: 2}

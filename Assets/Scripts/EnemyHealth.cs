@@ -4,14 +4,17 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 3; // 敵によって変更
-    private int currentHealth;
-    float flashDuration = 0.15f;
+    protected int currentHealth;
+    protected float flashDuration = 0.15f;
 
     public Sprite damageSprite;
-    private Sprite defaltSprite;
-    private SpriteRenderer spriteRenderer;
+    protected Sprite defaltSprite;
+    protected SpriteRenderer spriteRenderer;
 
     public GameObject enemyDieEffectPrefab;
+
+    public AudioSource enemyDamageSound;
+    public AudioSource enemyDieSound;
 
     void Start()
     {
@@ -20,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
         defaltSprite = spriteRenderer.sprite;
     }
 
-    public void TakeDamage(int damageAmount)
+    public virtual void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
 
@@ -34,21 +37,27 @@ public class EnemyHealth : MonoBehaviour
 
     IEnumerator FlashCoroutine()
     {
+        AudioSource.PlayClipAtPoint(enemyDamageSound.clip, transform.position, 0.1f);
+
         spriteRenderer.sprite = damageSprite;
         yield return new WaitForSeconds(flashDuration);
         spriteRenderer.sprite = defaltSprite;
     }
 
-    void Die()
+    public virtual void Die()
     {
         if (GameManager.Instance != null)
         {
             GameManager.Instance.EnemyDefeated();
         }
 
-        // 破壊エフェクトの再生、スコア加算などの処理をここに入れる
         Instantiate(enemyDieEffectPrefab, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(enemyDieSound.clip, transform.position, 0.3f);
+        ExecuteDestruction();
+    }
 
+    void ExecuteDestruction()
+    {
         Destroy(gameObject);
     }
 
@@ -57,7 +66,7 @@ public class EnemyHealth : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             Bullet bullet = other.GetComponent<Bullet>();
-            TakeDamage(bullet.damage); 
+            TakeDamage(bullet.damage);
         }
     }
 }

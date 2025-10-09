@@ -20,4 +20,4 @@ MonoBehaviour:
   fireRate: 0.4
   normalSpeed: 8
   lowSpeed: 5
-  maxHP: 3
+  maxHP: 4

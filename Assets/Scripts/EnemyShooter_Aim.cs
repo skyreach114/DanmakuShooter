@@ -33,7 +33,5 @@ public class EnemyShooter_Aim : MonoBehaviour
         bulletObj.transform.position = firePoint.position;
         Vector3 dir = playerObj.transform.position - firePoint.position;
         bulletObj.transform.rotation = Quaternion.FromToRotation(transform.up, dir);
-
-        // ’e‚Ì‰¹‚ğ–Â‚ç‚·ˆ—‚È‚Ç‚ğ‚±‚±‚É“ü‚ê‚é
     }
 }

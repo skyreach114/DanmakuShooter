@@ -13,7 +13,9 @@ public class PlayerExperience : MonoBehaviour
     public GameObject levelUPEffectPrefab;
 
     private const int MAX_LEVEL = 3;
-    private const int EXP_PER_LEVEL = 5;
+    private const int EXP_PER_LEVEL = 8;
+
+    public AudioSource levelUPSound;
 
     public int currentLevel { get; private set; } = 1;
     public int currentExp { get; private set; } = 0; // 現在の経験値（メーターのメモリ）
@@ -68,6 +70,8 @@ public class PlayerExperience : MonoBehaviour
     void LevelUp()
     {
         currentLevel++;
+        AudioSource.PlayClipAtPoint(levelUPSound.clip, new Vector3(0, 0, -9), 0.4f);
+        Instantiate(levelUPEffectPrefab, Vector3.zero, Quaternion.identity);
         Debug.Log($"プレイヤーがLv{currentLevel}にレベルアップしました！");
 
         GameManager.Instance.levelUpText.gameObject.SetActive(true);
@@ -94,7 +98,6 @@ public class PlayerExperience : MonoBehaviour
     {
         if (expMeterImage != null)
         {
-            // 経験値メーターの Fill Amount (0.0 ～ 1.0) を計算
             float fillAmount = (float)currentExp / EXP_PER_LEVEL;
             expMeterImage.fillAmount = fillAmount;
         }

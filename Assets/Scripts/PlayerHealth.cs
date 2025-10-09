@@ -6,16 +6,23 @@ public class PlayerHealth : MonoBehaviour
     public int maxHP = 5;
     public int currentHP;
 
-    public float invincibilityDuration = 0.9f;
+    private float invincibilityDuration = 1f;
     private bool isInvincible = false;
+
+    Camera mainCamera;
+    private float moveCamX = 0.7f;
 
     private SpriteRenderer spriteRenderer;
     public GameObject dieEffectPrefab;
+
+    public AudioSource damageSound;
+    public AudioSource dieSound;
 
     void Start()
     {
         currentHP = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        mainCamera = Camera.main;
     }
 
     public int GetHP()
@@ -36,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             StartCoroutine(InvincibilityCoroutine());
+            StartCoroutine(CameraShake());
         }
     }
 
@@ -43,6 +51,9 @@ public class PlayerHealth : MonoBehaviour
     {
         isInvincible = true;
         float flashInterval = 0.08f;
+
+        AudioSource.PlayClipAtPoint(damageSound.clip, new Vector3(0, 0, -8), 0.3f);
+
         float startTime = Time.time;
 
         while (Time.time < startTime + invincibilityDuration)
@@ -57,6 +68,16 @@ public class PlayerHealth : MonoBehaviour
         isInvincible = false;
     }
 
+    IEnumerator CameraShake()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            mainCamera.transform.Translate(moveCamX, 0, 0);
+            moveCamX *= -1;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
     void Die()
     {
         currentHP = 0;
@@ -69,9 +90,8 @@ public class PlayerHealth : MonoBehaviour
 
         GameManager.Instance.GameOver();
 
-        // 破壊エフェクトの再生、スコア加算などの処理をここに入れる
         Instantiate(dieEffectPrefab, transform.position, Quaternion.identity);
-
+        AudioSource.PlayClipAtPoint(dieSound.clip, transform.position, 0.5f);
         Destroy(gameObject);
     }
 
@@ -85,7 +105,10 @@ public class PlayerHealth : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            Die();
+            if (GameManager.Instance.isGameActive)
+            {
+                Die();
+            }
         }
     }
 }

@@ -3,10 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class BGMManager : MonoBehaviour
 {
-    private static BGMManager instance = null;
+    public static BGMManager instance = null;
 
     private AudioSource audioSource;
-    public AudioClip titleAndSelectBGM;
+
+    public BGMSetting titleAndSelectBGM; // InspectorでClipとVolumeを設定
+    public BGMSetting gameSceneBGM;
+    public BGMSetting bossBGM; // GameManagerから移動させるか、GameManager側で直接管理
+    public BGMSetting clearBGM;
 
     void Awake()
     {
@@ -22,28 +26,48 @@ public class BGMManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        audioSource.clip = titleAndSelectBGM;
+        audioSource.clip = titleAndSelectBGM.clip;
+        audioSource.volume = titleAndSelectBGM.volume;
         audioSource.loop = true;
         audioSource.Play();
     }
 
-    public void StopAndSwitchBGM(AudioClip gameBGM)
+    [System.Serializable] // UnityのInspectorに表示するために必要
+    public class BGMSetting
+    {
+        public AudioClip clip;
+        [Range(0.0f, 1.0f)] // Inspectorでスライダー表示
+        public float volume = 1.0f;
+    }
+
+    public void StopBGM()
+    {
+        audioSource.Stop();
+    }
+
+    public void StopAndSwitchBGM(BGMSetting newBGM)
     {
         audioSource.Stop();
 
-        audioSource.clip = gameBGM;
+        audioSource.clip = newBGM.clip;
+        audioSource.volume = newBGM.volume;
         audioSource.loop = true;
         audioSource.Play();
     }
 
     public void SwitchToTitleBGM()
     {
-        if (audioSource.clip != titleAndSelectBGM)
+        if (audioSource.clip != titleAndSelectBGM.clip)
         {
-            audioSource.Stop();
-            audioSource.clip = titleAndSelectBGM;
-            audioSource.loop = true;
-            audioSource.Play();
+            StopAndSwitchBGM(titleAndSelectBGM);
+        }
+    }
+
+    public void SwitchToGameSceneBGM()
+    {
+        if (audioSource.clip != gameSceneBGM.clip)
+        {
+            StopAndSwitchBGM(gameSceneBGM);
         }
     }
 

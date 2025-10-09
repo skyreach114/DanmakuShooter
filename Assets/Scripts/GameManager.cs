@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public EnemySpawner enemySpawner;
+    public BossSpawner bossSpawner;
 
-    public int enemiesDefeated = 0;
-    public int enemiesToClear = 15;
+    private int enemiesDefeated = 0;
+    private int bossSpawnCount = 10;
 
     public CharacterData[] characters;
     public GameObject playerPrefab;
@@ -28,7 +29,12 @@ public class GameManager : MonoBehaviour
     public GameObject titleButton;
     public GameObject clearEffectPrefab;
 
+    public AudioSource bossSpawnSound;
+    public AudioSource gameOverSound;
+    public AudioSource clearSound;
+
     public bool isGameActive = false;
+    public bool isBossSpawn = false;
     public bool isGameOver = false;
 
     void Awake()
@@ -81,6 +87,11 @@ public class GameManager : MonoBehaviour
             hpIconUI.InitializeHP(ph);
         }
 
+        if (BGMManager.instance != null)
+        {
+            BGMManager.instance.SwitchToGameSceneBGM();
+        }
+
         Invoke("EraseGameStartText", 1f);
     }
 
@@ -113,9 +124,33 @@ public class GameManager : MonoBehaviour
             enemiesDefeated++;
         }
 
-        if (enemiesDefeated >= enemiesToClear)
+        if (enemiesDefeated == bossSpawnCount)
         {
-            GameClear();
+            StartCoroutine(StartBossEncounter());
+        }
+    }
+
+    IEnumerator StartBossEncounter()
+    {
+        isBossSpawn = true;
+
+        if (BGMManager.instance != null)
+        {
+            BGMManager.instance.StopBGM();
+            bossSpawnSound.Play();
+
+            if (enemySpawner != null && bossSpawner != null)
+            {
+                enemySpawner.DestroyAllEnemies();
+                bossSpawner.StartSpawning();
+            }
+
+            if (bossSpawnSound.clip != null)
+            {
+                yield return new WaitForSeconds(bossSpawnSound.clip.length - 0.2f);
+            }
+
+            BGMManager.instance.StopAndSwitchBGM(BGMManager.instance.bossBGM);
         }
     }
 
@@ -131,7 +166,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void GameClear()
+    public void GameClear()
     {
         isGameActive = false;
         isGameOver = true;
@@ -141,12 +176,9 @@ public class GameManager : MonoBehaviour
         retryButton.SetActive(true);
         titleButton.SetActive(true);
 
-        //clearSound.Play();
+        clearSound.Play();
 
-        if (enemySpawner != null)
-        {
-            enemySpawner.DestroyAllEnemies();
-        }
+        BGMManager.instance.StopAndSwitchBGM(BGMManager.instance.clearBGM);
     }
 
     public void GameOver()
@@ -157,6 +189,8 @@ public class GameManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         retryButton.SetActive(true);
         titleButton.SetActive(true);
+
+        gameOverSound.Play();
     }
 
     public void Retry()
@@ -166,11 +200,9 @@ public class GameManager : MonoBehaviour
 
     public void BackToTitle()
     {
-        BGMManager bgmManager = BGMManager.GetInstance();
-
-        if (bgmManager != null)
+        if (BGMManager.instance != null)
         {
-            bgmManager.SwitchToTitleBGM();
+            BGMManager.instance.SwitchToTitleBGM();
         }
 
         SceneManager.LoadScene("TitleScene");

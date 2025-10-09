@@ -11,8 +11,6 @@ public class CharacterSelectManager : MonoBehaviour
     public Button startGameButton;
     private int selectedIndex = -1;
 
-    public AudioClip gameBGMClip;
-
     void Start()
     {
         startGameButton.interactable = false;
@@ -43,7 +41,7 @@ public class CharacterSelectManager : MonoBehaviour
         if (bgmManager != null)
         {
             // 2. BGM‚ğ’â~‚µAƒQ[ƒ€BGM‚ÉØ‚è‘Ö‚¦‚éˆ—‚ğŒÄ‚Ño‚·
-            bgmManager.StopAndSwitchBGM(gameBGMClip);
+            bgmManager.SwitchToGameSceneBGM();
         }
 
         SceneManager.LoadScene("GameScene");

@@ -17,7 +17,7 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 67f846e7bdfe8744ea0f7154b0d8ea48, type: 2}
   bulletPrefab: {fileID: 2811663618629892959, guid: e516a4cf2e4bb2b49bf38e2db9cd573b, type: 3}
   bulletSidePrefab: {fileID: 1250835658894696289, guid: fce9754711b62e143b46c043f7cdb227, type: 3}
-  fireRate: 0.25
-  normalSpeed: 7.5
+  fireRate: 0.28
+  normalSpeed: 7
   lowSpeed: 4.5
-  maxHP: 2
+  maxHP: 3
